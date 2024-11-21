@@ -1,0 +1,54 @@
+Options -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Proteger archivos específicos
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Archivo .htaccess en la carpeta uploads (Textiles/uploads/.htaccess)
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Denegar acceso a todos los archivos por defecto
+    Order Allow,Deny
+    Deny from all
+
+    # Permitir solo archivos de imagen específicos
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+        Order Allow,Deny
+        Allow from all
+    </FilesMatch>
+    
+    # Prevenir ejecución de scripts
+    SetHandler default-handler
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps
+    RemoveType .php .phtml .php3 .php4 .php5 .php7 .phps
+</IfModule>
+
+# Configuraciones adicionales de seguridad
+<IfModule mod_php5.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+RewriteEngine On
+RewriteBase /Textiles/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
