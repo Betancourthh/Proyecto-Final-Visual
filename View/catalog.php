@@ -46,24 +46,28 @@
                             <img src="uploads/<?php echo htmlspecialchars($tela['imagen']); ?>" 
                                  class="card-img-top tela-image" 
                                  alt="<?php echo htmlspecialchars($tela['nombre']); ?>">
+                            <!-- View/catalog.php (sección de la tarjeta de tela) -->
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($tela['nombre']); ?></h5>
                                 <p class="card-text">
-                                    <small class="text-muted">
-                                        Metraje disponible: 
+                                    <small class="text-muted">Metraje disponible: 
                                         <span class="fw-bold"><?php echo number_format($tela['metraje'], 2); ?> metros</span>
+                                    </small>
+                                </p>
+                                    <p class=  "card-text">
+                                        <small class="text-muted">Precio por metro: 
+                                        <span class="fw-bold text-success">$<?php echo number_format($tela['precio'], 0); ?></span>
                                     </small>
                                 </p>
                                 <?php if (isset($tela['colores'])): ?>
                                 <p class="card-text">
-                                    <small class="text-muted">
-                                        Colores disponibles: 
+                                    <small class="text-muted">Colores disponibles: 
                                         <span class="fw-bold"><?php echo htmlspecialchars($tela['colores']); ?></span>
                                     </small>
                                 </p>
                                 <?php endif; ?>
-                                <a href="index.php?controller=catalog&action=detail&id=<?php echo $tela['id']; ?>" 
-                                   class="btn btn-outline-primary">Ver detalles</a>
+                                    <a href="index.php?controller=catalog&action=detail&id=<?php echo $tela['id']; ?>" 
+                                class="btn btn-outline-primary">Ver detalles</a>
                             </div>
                         </div>
                     </div>

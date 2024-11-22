@@ -50,40 +50,47 @@
                         <h2 class="mb-4"><?php echo htmlspecialchars($tela['nombre']); ?></h2>
                         
                         <div class="details-section">
-                            <h5 class="text-muted mb-3">Detalles</h5>
-                            
-                            <!-- Metraje -->
-                            <div class="mb-3">
-                                <h6>Metraje Disponible:</h6>
-                                <span class="badge bg-success fs-6">
-                                    <?php echo number_format($tela['metraje'], 2); ?> metros
-                                </span>
-                            </div>
-                            
-                            <!-- Colores -->
-                            <?php if(isset($tela['colores']) && !empty($tela['colores'])): ?>
-                            <div class="mb-3">
-                                <h6>Colores Disponibles:</h6>
-                                <div>
-                                    <?php
-                                    // Si los colores están almacenados como string separado por comas
-                                    $colores = explode(',', $tela['colores']);
-                                    foreach($colores as $color):
-                                        $color = trim($color); // Eliminar espacios en blanco
-                                        if(!empty($color)):
-                                    ?>
-                                        <span class="color-badge">
-                                            <i class="fas fa-circle me-1"></i>
-                                            <?php echo htmlspecialchars($color); ?>
-                                        </span>
-                                    <?php 
-                                        endif;
-                                    endforeach; 
-                                    ?>
-                                </div>
-                            </div>
-                            <?php endif; ?>
-                        </div>
+    <h5 class="text-muted mb-3">Detalles</h5>
+    
+    <!-- Precio -->
+    <div class="mb-3">
+        <h6>Precio por Metro:</h6>
+        <span class="badge bg-success fs-6">
+            $<?php echo number_format($tela['precio'], 0); ?>
+        </span>
+    </div>
+    
+    <!-- Metraje -->
+    <div class="mb-3">
+        <h6>Metraje Disponible:</h6>
+        <span class="badge bg-primary fs-6">
+            <?php echo number_format($tela['metraje'], 2); ?> metros
+        </span>
+    </div>
+    
+    <!-- Colores -->
+    <?php if(isset($tela['colores']) && !empty($tela['colores'])): ?>
+    <div class="mb-3">
+        <h6>Colores Disponibles:</h6>
+        <div>
+            <?php
+            $colores = explode(',', $tela['colores']);
+            foreach($colores as $color):
+                $color = trim($color);
+                if(!empty($color)):
+            ?>
+                <span class="color-badge">
+                    <i class="fas fa-circle me-1"></i>
+                    <?php echo htmlspecialchars($color); ?>
+                </span>
+            <?php 
+                endif;
+            endforeach; 
+            ?>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
                         
                         <!-- Botones de acción -->
                         <div class="d-grid gap-2 mt-4">
